@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SearcherEye - Empowering Tech Talent</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- three.js for hero animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 transition-all duration-300 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" id="logo-link" class="text-2xl font-bold text-slate-900 cursor-pointer">
+                Searcher<span class="text-purple-600">Eye</span>
+            </a>
+            
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-slate-600 hover:text-purple-600 transition-colors duration-300">About</a>
+                <a href="#services" class="nav-link text-slate-600 hover:text-purple-600 transition-colors duration-300">Services</a>
+                <a href="#" id="careers-link-desktop" class="text-slate-600 hover:text-purple-600 transition-colors duration-300">Careers</a>
+                <a href="#testimonials" class="nav-link text-slate-600 hover:text-purple-600 transition-colors duration-300">Testimonials</a>
+                <a href="#contact" class="nav-link text-slate-600 hover:text-purple-600 transition-colors duration-300">Contact</a>
+            </div>
+            
+            <!-- Get Started Button (Desktop) -->
+            <a href="#contact" class="nav-link hidden md:inline-block bg-purple-600 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:bg-purple-700 transition-all duration-300 transform hover:scale-105">
+                Get Started
+            </a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-slate-800 focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#about" class="nav-link block text-slate-600 hover:text-purple-600 py-2">About</a>
+            <a href="#services" class="nav-link block text-slate-600 hover:text-purple-600 py-2">Services</a>
+            <a href="#" id="careers-link-mobile" class="block text-slate-600 hover:text-purple-600 py-2">Careers</a>
+            <a href="#testimonials" class="nav-link block text-slate-600 hover:text-purple-600 py-2">Testimonials</a>
+            <a href="#contact" class="nav-link block text-slate-600 hover:text-purple-600 py-2">Contact</a>
+            <a href="#contact" class="nav-link block bg-purple-600 text-white text-center font-semibold mt-2 px-5 py-2 rounded-lg shadow-md hover:bg-purple-700 transition-all duration-300">
+                Get Started
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div id="app-content">
+        <!-- Home Page Content -->
+        <main id="home-content">
+            <!-- Hero Section -->
+            <section id="home" class="hero-section bg-slate-50">
+                <canvas id="hero-canvas"></canvas>
+                <div class="container relative mx-auto px-6 py-24 md:py-32 text-center">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+                            Empowering the Next Generation of <span class="text-purple-600">Tech Talent</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10">
+                            We bridge the gap between education and industry, providing students with invaluable hands-on work experience through curated internships and mentorship.
+                        </p>
+                        <div class="flex justify-center items-center gap-4 flex-wrap">
+                            <a href="#services" class="nav-link bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-105">
+                                Join Our Internship
+                            </a>
+                            <a href="#about" class="nav-link bg-slate-200 text-slate-800 font-semibold px-8 py-3 rounded-lg hover:bg-slate-300 transition-all duration-300 transform hover:scale-105">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About, Services, Testimonials, Contact Sections (as before) -->
+            <section id="about" class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col items-center text-center">
+      
+      <!-- Heading -->
+      <h2 class="text-3xl font-bold text-slate-900 mb-4">Our Mission</h2>
+      
+      <!-- Paragraph -->
+      <p class="text-slate-600 leading-relaxed max-w-2xl mb-6">
+        At SearcherEye, our mission is to unlock the potential of aspiring tech professionals. 
+        We believe that practical experience is the cornerstone of a successful career. 
+        By connecting talented students with innovative companies, we create opportunities that 
+        foster growth, skill development, and real-world impact. 
+        We're not just finding internships; we're building the future of technology, one placement at a time.
+      </p>
+      
+      <!-- Button -->
+      <a href="#contact" class="text-purple-600 font-semibold hover:underline mb-8">
+        Connect with us &rarr;
+      </a>
+      
+      <!-- Icon -->
+      <div class="bg-purple-100 p-8 rounded-full">
+        <div class="bg-white p-12 rounded-full shadow-lg">
+          <i data-lucide="rocket" class="w-24 h-24 text-purple-600"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+            <section id="services" class="py-20 bg-slate-50">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">How We Help</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto mb-12">
+                        We offer a comprehensive suite of services designed to launch your tech career.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+                            <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="briefcase" class="w-8 h-8"></i></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Internship Programs</h3>
+                            <p class="text-slate-600">Gain hands-on experience with our curated internship placements at leading tech companies and innovative startups.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+                            <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="users" class="w-8 h-8"></i></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Expert Mentorship</h3>
+                            <p class="text-slate-600">Connect with industry veterans who provide personalized guidance, support, and insights to help you navigate your career path.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+                            <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="compass" class="w-8 h-8"></i></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Career Guidance</h3>
+                            <p class="text-slate-600">From resume building to interview prep, we provide the resources you need to stand out and secure your dream job.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="testimonials" class="py-20 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Student Success Stories</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto mb-12">Hear from students who have launched their careers with SearcherEye.</p>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <p class="text-slate-600 mb-6">"SearcherEye connected me with an internship that turned into a full-time offer. The mentorship was invaluable and truly shaped my career goals."</p>
+                            <div class="flex items-center"><img src="https://placehold.co/40x40/E9D5FF/7C3AED?text=AS" alt="Alex Smith" class="w-10 h-10 rounded-full mr-4"><div><p class="font-bold text-slate-900">Alex Smith</p><p class="text-sm text-slate-500">Software Engineer @ TechCorp</p></div></div>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <p class="text-slate-600 mb-6">"The career guidance sessions were a game-changer. I went into my interviews with so much more confidence and landed my dream role as a UX designer."</p>
+                            <div class="flex items-center"><img src="https://placehold.co/40x40/E9D5FF/7C3AED?text=JM" alt="Jessica Miller" class="w-10 h-10 rounded-full mr-4"><div><p class="font-bold text-slate-900">Jessica Miller</p><p class="text-sm text-slate-500">UX Designer @ Innovate Inc.</p></div></div>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <p class="text-slate-600 mb-6">"The hands-on project experience I gained during my internship was incredible. It gave me a real portfolio and the skills I needed to get hired."</p>
+                            <div class="flex items-center"><img src="https://placehold.co/40x40/E9D5FF/7C3AED?text=CW" alt="Chris Wilson" class="w-10 h-10 rounded-full mr-4"><div><p class="font-bold text-slate-900">Chris Wilson</p><p class="text-sm text-slate-500">Data Analyst @ Future Solutions</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="py-20 bg-slate-50">
+                <div class="container mx-auto px-6"><div class="bg-white rounded-xl shadow-lg p-8 md:p-12"><div class="grid md:grid-cols-2 gap-12"><div><h2 class="text-3xl font-bold text-slate-900 mb-4">Get In Touch</h2><p class="text-slate-600 mb-8">Have questions or ready to start your journey? Reach out to us! We're excited to help you take the next step in your tech career.</p><div class="space-y-4"><a href="mailto:hello@searchereye.com" class="flex items-center text-slate-600 hover:text-purple-600 transition-colors"><i data-lucide="mail" class="w-5 h-5 mr-3 text-purple-600"></i><span>hello@searchereye.com</span></a><div class="flex items-center"><i data-lucide="map-pin" class="w-5 h-5 mr-3 text-purple-600"></i><span>Remote First | Global Opportunities</span></div></div><div class="flex space-x-4 mt-8"><a href="#" class="text-slate-500 hover:text-purple-600"><i data-lucide="twitter" class="w-6 h-6"></i></a><a href="#" class="text-slate-500 hover:text-purple-600"><i data-lucide="linkedin" class="w-6 h-6"></i></a><a href="#" class="text-slate-500 hover:text-purple-600"><i data-lucide="instagram" class="w-6 h-6"></i></a></div></div><form><div class="space-y-4"><div><label for="name" class="block text-sm font-medium text-slate-700">Full Name</label><input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"></div><div><label for="email" class="block text-sm font-medium text-slate-700">Email Address</label><input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"></div><div><label for="message" class="block text-sm font-medium text-slate-700">Message</label><textarea id="message" name="message" rows="4" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"></textarea></div><div><button type="submit" class="w-full bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-purple-700 transition-all duration-300">Send Message</button></div></div></form></div></div></div>
+            </section>
+        </main>
+
+        <!-- Careers Page Content (Initially Hidden) -->
+        <main id="careers-content" class="hidden">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Join Our Team at <span class="text-purple-600">SearcherEye</span></h1>
+                    <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                        Whether you're a student looking for your first big break or a professional eager to make an impact, you can find exciting opportunities to grow with us. We're building the future of tech talent, and we want you to be a part of it.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-20 bg-slate-50">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Current Openings</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Job Card 1 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-slate-900">Software Eng. Intern</h3>
+                                    <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">Internship</span>
+                                </div>
+                                <p class="text-slate-500 mb-4">Remote</p>
+                                <p class="text-slate-600 text-sm">
+                                    Work on real-world projects, contribute to our codebase, and learn from experienced mentors in a fast-paced environment.
+                                </p>
+                            </div>
+                            <button class="mt-6 w-full bg-purple-600 text-white font-semibold py-2 rounded-lg hover:bg-purple-700 transition-colors">Apply Now</button>
+                        </div>
+                        <!-- Job Card 2 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-slate-900">Partnership Coordinator</h3>
+                                    <span class="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">Full-Time</span>
+                                </div>
+                                <p class="text-slate-500 mb-4">New York, NY</p>
+                                <p class="text-slate-600 text-sm">
+                                    Build and maintain relationships with our tech company partners to create new internship opportunities for students.
+                                </p>
+                            </div>
+                            <button class="mt-6 w-full bg-purple-600 text-white font-semibold py-2 rounded-lg hover:bg-purple-700 transition-colors">Apply Now</button>
+                        </div>
+                        <!-- Job Card 3 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-slate-900">UX/UI Design Intern</h3>
+                                    <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">Internship</span>
+                                </div>
+                                <p class="text-slate-500 mb-4">Remote</p>
+                                <p class="text-slate-600 text-sm">
+                                    Help shape the user experience of our platform. Create wireframes, mockups, and prototypes that delight our users.
+                                </p>
+                            </div>
+                            <button class="mt-6 w-full bg-purple-600 text-white font-semibold py-2 rounded-lg hover:bg-purple-700 transition-colors">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Why Work With Us?</h2>
+                    <div class="grid md:grid-cols-3 gap-8 text-center">
+                        <div>
+                            <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="trending-up" class="w-8 h-8"></i></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Make an Impact</h3>
+                            <p class="text-slate-600">Directly contribute to shaping the careers of the next generation of tech leaders.</p>
+                        </div>
+                        <div>
+                            <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="graduation-cap" class="w-8 h-8"></i></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Continuous Learning</h3>
+                            <p class="text-slate-600">We invest in your growth with access to mentors, workshops, and learning resources.</p>
+                        </div>
+                        <div>
+                            <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="globe-2" class="w-8 h-8"></i></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Flexible Culture</h3>
+                            <p class="text-slate-600">We embrace a remote-first culture that values work-life balance and autonomy.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <a href="#" id="footer-logo-link" class="text-2xl font-bold cursor-pointer">
+                Searcher<span class="text-purple-500">Eye</span>
+            </a>
+            <div class="flex justify-center space-x-6 mt-6 mb-6">
+                <a href="#about" class="nav-link hover:text-purple-400 transition-colors">About</a>
+                <a href="#services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
+                <a href="#" id="careers-link-footer" class="hover:text-purple-400 transition-colors">Careers</a>
+                <a href="#testimonials" class="nav-link hover:text-purple-400 transition-colors">Testimonials</a>
+            </div>
+            <p class="text-slate-400 text-sm">&copy; 2024 SearcherEye. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Page Navigation Logic ---
+        const homeContent = document.getElementById('home-content');
+        const careersContent = document.getElementById('careers-content');
+        const pageLinks = {
+            careers: [
+                document.getElementById('careers-link-desktop'),
+                document.getElementById('careers-link-mobile'),
+                document.getElementById('careers-link-footer')
+            ],
+            home: [
+                document.getElementById('logo-link'),
+                document.getElementById('footer-logo-link'),
+                ...document.querySelectorAll('.nav-link')
+            ]
+        };
+
+        function showPage(pageId) {
+            window.scrollTo(0, 0); // Scroll to top on page change
+            if (pageId === 'careers') {
+                homeContent.classList.add('hidden');
+                careersContent.classList.remove('hidden');
+            } else {
+                careersContent.classList.add('hidden');
+                homeContent.classList.remove('hidden');
+            }
+        }
+
+        pageLinks.careers.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('careers');
+                closeMobileMenu();
+            });
+        });
+
+        pageLinks.home.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // If it's a hash link, prevent default to handle scrolling manually
+                if (link.getAttribute('href')?.startsWith('#')) {
+                    e.preventDefault();
+                    showPage('home');
+                    // Timeout to allow the DOM to update before scrolling
+                    setTimeout(() => {
+                        const targetId = link.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 50);
+                } else {
+                    // For logo links without a hash
+                    showPage('home');
+                }
+                 closeMobileMenu();
+            });
+        });
+
+        // --- Mobile Menu ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = mobileMenuButton.querySelector('i');
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+            menuIcon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+        }
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const iconName = mobileMenu.classList.contains('hidden') ? 'menu' : 'x';
+            menuIcon.setAttribute('data-lucide', iconName);
+            lucide.createIcons();
+        });
+
+        // --- Header Shadow on Scroll ---
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('shadow-lg', window.scrollY > 10);
+        });
+
+        // --- three.js Hero Animation ---
+        let scene, camera, renderer, particles;
+
+        function initHeroAnimation() {
+            const canvas = document.getElementById('hero-canvas');
+            const container = canvas.parentElement;
+
+            // Scene
+            scene = new THREE.Scene();
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 50;
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Particles
+            const particleCount = 500;
+            const positions = new Float32Array(particleCount * 3);
+            for (let i = 0; i < particleCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 200;
+            }
+            const particlesGeometry = new THREE.BufferGeometry();
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                color: 0x7C3AED,
+                size: 0.2,
+                blending: THREE.AdditiveBlending
+            });
+
+            particles = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particles);
+
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize, false);
+            
+            animate();
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('hero-canvas').parentElement;
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Animate particles
+            const time = Date.now() * 0.0001;
+            particles.rotation.x = time * 0.25;
+            particles.rotation.y = time * 0.5;
+
+            renderer.render(scene, camera);
+        }
+        
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initHeroAnimation();
+        });
+    </script>
+</body>
+</html>
